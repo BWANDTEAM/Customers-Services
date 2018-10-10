@@ -55,25 +55,25 @@ public class CardController {
     @RequestMapping(value = "/cards/new", method = RequestMethod.GET)
     public String initCreationForm(Customer customer, ModelMap model) {
         Card card = new Card();
-        customer.addCard(card);
+//        customer.addCard(card);
         model.put("card", card);
         return VIEWS_cards_CREATE_OR_UPDATE_FORM;
     }
-
-    @RequestMapping(value = "/cards/new", method = RequestMethod.POST)
-    public String processCreationForm(Customer customer, @Valid Card card, BindingResult result, ModelMap model) {
-        if (StringUtils.hasLength(card.getName()) && card.isNew() && customer.getCard(card.getName(), true) != null){
-            result.rejectValue("name", "duplicate", "already exists");
-        }
-        if (result.hasErrors()) {
-            model.put("card", card);
-            return VIEWS_cards_CREATE_OR_UPDATE_FORM;
-        } else {
-            customer.addCard(card);
-            this.bankService.saveCard(card);
-            return "redirect:/customers/{customerId}";
-        }
-    }
+//
+//    @RequestMapping(value = "/cards/new", method = RequestMethod.POST)
+//    public String processCreationForm(Customer customer, @Valid Card card, BindingResult result, ModelMap model) {
+//        if (StringUtils.hasLength(card.getName()) && card.isNew() && customer.getCard(card.getName(), true) != null){
+//            result.rejectValue("name", "duplicate", "already exists");
+//        }
+//        if (result.hasErrors()) {
+//            model.put("card", card);
+//            return VIEWS_cards_CREATE_OR_UPDATE_FORM;
+//        } else {
+////            customer.addCard(card);
+//            this.bankService.saveCard(card);
+//            return "redirect:/customers/{customerId}";
+//        }
+//    }
 
     @RequestMapping(value = "/cards/{cardId}/edit", method = RequestMethod.GET)
     public String initUpdateForm(@PathVariable("cardId") int cardId, ModelMap model) {
@@ -88,7 +88,7 @@ public class CardController {
             model.put("card", card);
             return VIEWS_cards_CREATE_OR_UPDATE_FORM;
         } else {
-            customer.addCard(card);
+//            customer.addCard(card);
             this.bankService.saveCard(card);
             return "redirect:/customers/{customerId}";
         }

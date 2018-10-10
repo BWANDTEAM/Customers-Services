@@ -35,8 +35,11 @@ public class JpaCustomerRepositoryImpl implements CustomerRepository {
     public Collection<Customer> findByLastName(String lastName) {
         // using 'join fetch' because a single query should load both customers and cards
         // using 'left join fetch' because it might happen that an customer does not have cards yet
-        Query query = this.em.createQuery("SELECT DISTINCT customer FROM Customer customer left join fetch customer.cards WHERE customer.lastName LIKE :lastName");
-        query.setParameter("lastName", lastName + "%");
+//        Query query = this.em.createQuery("SELECT DISTINCT customer FROM Customer customer left join fetch customer.cards WHERE customer.lastName LIKE :lastName");
+        
+    	 Query query = this.em.createQuery("SELECT DISTINCT customer FROM Customer customer WHERE customer.lastName LIKE :lastName");
+         
+    	query.setParameter("lastName", lastName + "%");
         return query.getResultList();
     }
 
